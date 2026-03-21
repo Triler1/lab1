@@ -9,7 +9,7 @@
 ---
 
 1. Реализация
-```
+```python
 def contains(arr, target):
     for x in arr:
         if x == target:
