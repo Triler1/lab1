@@ -9,15 +9,15 @@
 ---
 
 1. Реализация
-
+```
 def contains(arr, target):
     for x in arr:
         if x == target:
             return True
     return False
-
+```
 2. Функция измерения времени.
-
+```
 import time
 
 def measure_time(func, data, target):
@@ -25,9 +25,9 @@ def measure_time(func, data, target):
     func(data, target)
     end = time.perf_counter()
     return end - start
-
+```
 3. Функция генерации данных.
-
+```
 import random
 
 def generate_array(n):
@@ -35,9 +35,9 @@ def generate_array(n):
     for i in range(n):
         arr.append(random.randint(0, 10000))
     return arr
-
+```
 4. Эксперимент.
-
+```
 import time
 import random
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         target = random.randint(0, 10000)
         t = measure_time(contains, arr, target)
         print(n, t)
-
+```
 | n | t, c |
 |---|------|
 | 100 | 3.2999996619764715e-06 |
