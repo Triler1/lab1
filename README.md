@@ -152,13 +152,10 @@ def generate_array(n):
 if __name__ == '__main__':
     sizes = [100, 1000, 5000, 10000]
 
-    print("| n | t, c |")
-    print("|---|------|")
-
     for n in sizes:
         arr = generate_array(n)
         t = measure_time(second_max, arr)
-        print(f"| {n} | {t:.5f} |")
+        print(n, t)
 ```
 | n | t, c |
 |---|------|
@@ -167,5 +164,109 @@ if __name__ == '__main__':
 | 5000 | 0.00011 |
 | 10000 | 0.00022 |
 
+# Задание 3: Бинарный поиск
 
-| 10000 | 4.55999997939216e-05 |
+## Описание
+
+Бинарный поиск используется для поиска элемента в **отсортированном массиве**.
+
+---
+
+## Идея алгоритма
+
+1. Выбирается середина массива  
+2. Если элемент найден — поиск завершён  
+3. Если элемент меньше — поиск продолжается в левой части  
+4. Если больше — в правой части  
+
+---
+
+
+1. Реализация
+```python
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return True
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return False
+```
+2. Функция измерения времени
+```python
+import time
+
+def measure_time(func, data, target):
+    start = time.perf_counter()
+    func(data, target)
+    end = time.perf_counter()
+    return end - start
+```
+3. Функция генерации данных
+```python
+import random
+
+def generate_array(n):
+    arr = []
+    for i in range(n):
+        arr.append(random.randint(0, 10000))
+    arr.sort()
+    return arr
+```
+4. Эксперимент
+```python
+import time
+import random
+
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return True
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return False
+
+def measure_time(func, data, target):
+    start = time.perf_counter()
+    func(data, target)
+    end = time.perf_counter()
+    return end - start
+
+def generate_array(n):
+    arr = []
+    for i in range(n):
+        arr.append(random.randint(0, 10000))
+    arr.sort()
+    return arr
+
+if __name__ == '__main__':
+    sizes = [100, 1000, 5000, 10000]
+
+    for n in sizes:
+        arr = generate_array(n)
+        target = random.randint(0, 10000)
+        t = measure_time(binary_search, arr, target)
+        print(n, t)
+```
+| n | t, c |
+|---|------|
+| 100 | 3.30000 |
+| 1000 | 1.79999 |
+| 5000 | 1.10000 |
+| 10000 | 2.50000 |
