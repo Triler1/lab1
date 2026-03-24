@@ -270,3 +270,66 @@ if __name__ == '__main__':
 | 1000 | 1.79999 |
 | 5000 | 1.10000 |
 | 10000 | 2.50000 |
+
+---
+
+# Задание 4: Построение таблицы умножения
+
+1. Реализация
+```cpp
+void table(int n) {
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= n; j++) {
+            cout << i * j << " ";
+        }
+        cout << endl;
+    }
+}
+```
+2. Функция измерения времени
+```cpp
+float measure_time(void (*func)(int), int n) {
+    auto start = chrono::high_resolution_clock::now();
+    func(n);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<float> diff = end - start;
+    return diff.count();
+}
+```
+3. Эксперимент
+```cpp
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+
+void table(int n) {
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= n; j++) {
+            int x = i * j;
+        }
+    }
+}
+
+float measure_time(void (*func)(int), int n) {
+    auto start = chrono::high_resolution_clock::now();
+    func(n);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<float> diff = end - start;
+    return diff.count();
+}
+
+int main() {
+    int sizes[] = {100, 1000, 5000, 10000};
+    for (int n : sizes) {
+        float t = measure_time(table, n);
+        cout << n << " " << t << endl;
+    }
+}
+```
+| n | t, c |
+|---|------|
+| 100 | 0.00001 |
+| 1000 | 0.00117 |
+| 5000 | 0.02922 |
+| 10000 | 0.11636 |
