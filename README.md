@@ -288,6 +288,8 @@ void table(int n) {
 ```
 2. Функция измерения времени
 ```cpp
+#include <chrono>
+
 float measure_time(void (*func)(int), int n) {
     auto start = chrono::high_resolution_clock::now();
     func(n);
